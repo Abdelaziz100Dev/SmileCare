@@ -1,4 +1,37 @@
-#spring.main.banner-mode=off
+spring:
+  sql:
+    init:
+      mode: always
+      platform: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jwtSecurity
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database: POSTGRESQL
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  mvc:
+    format:
+      date: dd/MM/yyyy
+application:
+  security:
+    jwt:
+      secret-key: D51A70F140DFD01686FE543E1AC725DFC1733743947508F2E358F8FE7C5EC8F2 #404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+
+#  liquibase:
+#    change-log:
+#      classpath:/db/changelog/2024/01/02-01-changelog.xml
+
+
 #logging.level.org.springframework=ERROR
 #logging.level.org.springframework.security=DEBUG
 #spring.jpa.hibernate.ddl-auto=none
@@ -9,7 +42,8 @@
 #spring.datasource.username=postgres
 #spring.datasource.password=s$cret
 
-spring.mvc.format.date=dd/MM/yyyy
+
+
 #spring.datasource.url=jdbc:mysql://localhost:3306/taskTrack?createDatabaseIfNotExist=true
 #spring.datasource.username=root
 #spring.datasource.password=
@@ -27,7 +61,7 @@ spring.mvc.format.date=dd/MM/yyyy
 
 
 # importing changes loge here
-spring.liquibase.change-log=classpath:/db/changelog/2024/01/02-01-changelog.yaml
+
 
 
 
