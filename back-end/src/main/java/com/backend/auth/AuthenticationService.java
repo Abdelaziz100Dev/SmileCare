@@ -46,8 +46,10 @@ public class AuthenticationService {  private final UserRepository repository;
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
+                .token(com.backend.auth.Token.builder()
+                        .accessToken(jwtToken)
+                        .refreshToken(refreshToken)
+                        .build())
                 .build();
     }
 
@@ -65,8 +67,8 @@ public class AuthenticationService {  private final UserRepository repository;
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
+                .token(com.backend.auth.Token.builder().accessToken(jwtToken)
+                .refreshToken(refreshToken).build())
                 .build();
     }
 
@@ -112,8 +114,10 @@ public class AuthenticationService {  private final UserRepository repository;
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 var authResponse = AuthenticationResponse.builder()
-                        .accessToken(accessToken)
-                        .refreshToken(refreshToken)
+                        .token(com.backend.auth.Token.builder()
+                                .accessToken(accessToken)
+                                .refreshToken(refreshToken)
+                                .build())
                         .build();
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }

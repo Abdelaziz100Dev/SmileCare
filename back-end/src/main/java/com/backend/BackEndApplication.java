@@ -30,7 +30,7 @@ public class BackEndApplication {
                     .password("password")
                     .role(ADMIN)
                     .build();
-            System.out.println("Admin token: " + service.register(admin).getAccessToken());
+            System.out.println("Admin token: " + service.register(admin).getToken().getAccessToken());
 
             var manager = RegisterRequest.builder()
                     .firstname("Admin")
@@ -39,16 +39,16 @@ public class BackEndApplication {
                     .password("password")
                     .role(MANAGER)
                     .build();
-            System.out.println("Manager token: " + service.register(manager).getAccessToken());
+            System.out.println("Manager token: " + service.register(manager).getToken().getAccessToken());
 
             var user = RegisterRequest.builder()
                     .firstname("user")
                     .lastname("user")
-                    .email("user@mail.com")
-                    .password("lkjdsf")
+                    .email("root")
+                    .password("root")
                     .role(USER)
                     .build();
-            System.out.println("user token: " + service.register(user).getAccessToken());
+            System.out.println("user token: " + service.register(user).getToken().getAccessToken());
 
         };
     }

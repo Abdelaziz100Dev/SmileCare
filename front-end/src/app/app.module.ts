@@ -30,6 +30,9 @@ import {MatChipsModule} from "@angular/material/chips";
 // import { StandaloneComponentsComponent } from './components/standalone-components/standalone-components.component';
 // import { ChipsInputExampleComponent } from './components/standaloneComponents/chips-input-example/chips-input-example.component';
 import { ChipsInputComponent } from './components/standaloneComponents/chips-input/chips-input.component';
+import {LoginComponent} from "./components/auth/LoginComponent";
+import {userReducer} from "./states/auth/authReducer";
+import {LoginEffects} from "./states/auth/authEffects";
 
 
 @NgModule({
@@ -37,6 +40,7 @@ import { ChipsInputComponent } from './components/standaloneComponents/chips-inp
     AppComponent,
     TasksComponent,
     AddTaskComponent,
+    LoginComponent
     // StandaloneComponentsComponent,
     // ChipsInputExampleComponent,
     // ChipsInputComponent
@@ -55,8 +59,8 @@ import { ChipsInputComponent } from './components/standaloneComponents/chips-inp
     MatDialogModule,
     MatButtonModule,
     //Ngrx modules
-    StoreModule.forRoot({tasks: taskReducer}),
-    EffectsModule.forRoot([TaskEffects, AppEffects]),
+    StoreModule.forRoot({tasks: taskReducer,user:userReducer}),
+    EffectsModule.forRoot([TaskEffects, AppEffects,LoginEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     MatCardModule,
     MatTableModule,
