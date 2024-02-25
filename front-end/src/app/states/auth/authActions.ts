@@ -11,6 +11,7 @@ export const storeToken = createAction(
   STORE_TOKEN,
   props<{token:Token}>()
 );
+
 export const requestLogin = createAction(
   REQUEST_LOGIN,
   props<{ username: string, password: string }>()
@@ -23,5 +24,24 @@ export const loginSuccess = createAction(
 
 export const loginFailure = createAction(
   LOGIN_FAILURE,
+  props<{ error: string }>()
+);
+
+const REQUEST_REGISTER = '[register] Request register';
+const REGISTER_SUCCESS = '[register] register Success';
+const REGISTER_FAILURE = '[register] register Failure';
+
+export const requestRegister = createAction(
+  REQUEST_REGISTER,
+  props<{ username: string, password: string }>()
+);
+
+export const registerSuccess = createAction(
+  REGISTER_SUCCESS,
+  props<{ authState: AuthState }>()
+);
+
+export const registerFailure = createAction(
+  REGISTER_FAILURE,
   props<{ error: string }>()
 );

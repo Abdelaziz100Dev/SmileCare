@@ -1,4 +1,4 @@
-import {isDevMode, NgModule} from '@angular/core';
+import {isDevMode, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -30,9 +30,15 @@ import {MatChipsModule} from "@angular/material/chips";
 // import { StandaloneComponentsComponent } from './components/standalone-components/standalone-components.component';
 // import { ChipsInputExampleComponent } from './components/standaloneComponents/chips-input-example/chips-input-example.component';
 import { ChipsInputComponent } from './components/standaloneComponents/chips-input/chips-input.component';
-import {LoginComponent} from "./components/auth/LoginComponent";
+import {LoginComponent} from "./pages/sessions/login/login.component";
 import {userReducer} from "./states/auth/authReducer";
 import {LoginEffects} from "./states/auth/authEffects";
+import {RegisterComponent} from "./components/auth/RegisterComponent";
+import { HomeComponent } from './pages/home/home.component';
+import {LoginFormComponent} from "./components/login-form";
+import {TCInputComponent} from "./components/input";
+import {TCSwitcherComponent} from "./components/switcher";
+import {TCButtonComponent} from "./components/button";
 
 
 @NgModule({
@@ -40,10 +46,13 @@ import {LoginEffects} from "./states/auth/authEffects";
     AppComponent,
     TasksComponent,
     AddTaskComponent,
-    LoginComponent
-    // StandaloneComponentsComponent,
-    // ChipsInputExampleComponent,
-    // ChipsInputComponent
+    // LoginComponent,
+    LoginComponent,
+    LoginFormComponent,
+    RegisterComponent,
+    HomeComponent,
+    TCInputComponent,
+    TCSwitcherComponent,TCButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {TasksComponent} from "./components/List-tasks/tasks.component";
-import {LoginComponent} from "./components/auth/LoginComponent";
+import {LoginComponent} from "./pages/sessions/login/login.component";
 
 const routes: Routes = [
   {path : "tasks", component: TasksComponent },

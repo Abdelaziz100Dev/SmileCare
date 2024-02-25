@@ -14,4 +14,8 @@ export class AuthService {
   login(username:string,password:string):Observable<AuthState>{
     return this.http.post<AuthState>(env.host+"/api/v1/auth/authenticate",{"email": username, "password": password});
   }
+  register(username:string,password:string):Observable<AuthState>{
+    return this.http.post<AuthState>(env.host+"/api/v1/auth/register",{"email": username, "password": password});
+
+  }
 }
