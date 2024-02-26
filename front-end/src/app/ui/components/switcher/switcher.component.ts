@@ -27,7 +27,7 @@ export class TCSwitcherComponent implements OnInit {
   @Input('value') _value: boolean;
   @Input() bgColor?: string | string[];
   @Input() borderColor: string | string[];
-  @Input() color?: string | string[];
+  @Input() color: string | string[];
 	@Input() labelColor?: string | string[];
 	@Output() valueChanged: EventEmitter<boolean>;
   currentBgColor?: string;
@@ -99,8 +99,8 @@ export class TCSwitcherComponent implements OnInit {
     st: state,
     bg: string | string[] = this.bgColor,
     border: string | string[] = this.borderColor,
-    color?: string | string[] = this.color,
-    labelColor ?: string | string[] = this.labelColor
+    color: string | string[] = this.color,
+    labelColor : string | string[] = this.labelColor
   ) {
     let styleIndex: number = 0;
 

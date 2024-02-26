@@ -40,13 +40,13 @@ export class PageSwitchersComponent extends BasePageComponent implements OnInit,
     };
   }
 
-   ngOnInit() {
+  ngOnInit() {
     super.ngOnInit();
 
     this.initReactiveForm();
   }
 
-  override ngOnDestroy() {
+  ngOnDestroy() {
     super.ngOnDestroy();
   }
 

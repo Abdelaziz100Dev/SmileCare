@@ -23,7 +23,18 @@
             "styles": [
               "@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+              "src/assets/scss/bootstrap/bootstrap.scss",
+              "src/assets/scss/simple-line-icons.scss",
+              "src/assets/css/icofont.min.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/assets/scss/ng-zorro-theme.less",
+              "node_modules/animate.css/animate.min.css",
+              "src/assets/scss/loader.scss",
+              "src/assets/scss/styles.scss"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"

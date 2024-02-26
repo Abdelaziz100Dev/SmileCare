@@ -1,66 +1,66 @@
-<form [formGroup]="taskForm" style="background:white; padding: 1rem" (ngSubmit)="SaveTask()" >
-  <mat-card style="background:white;  padding: 1rem">
-    <mat-card-title>Add Task</mat-card-title>
-    <mat-card-content>
-      <!-- Id Field (Hidden) -->
-      <mat-form-field style="background:white;" *ngIf="isEdite">
-        <input matInput formControlName="title" required>
-      </mat-form-field>
-
-
-      <!-- Title Field -->
-      <mat-form-field style="background:white;">
-        <mat-label>Title</mat-label>
-        <input matInput formControlName="title" required>
-      </mat-form-field>
-
-      <!-- Description Field -->
-      <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" required></textarea>
-      </mat-form-field>
-
-      <!-- Start Date Field -->
-      <mat-form-field>
-        <mat-label>Start Date</mat-label>
-        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" required>
-        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #startDatePicker></mat-datepicker>
-      </mat-form-field>
-
-      <!-- Due Date Field -->
-      <mat-form-field>
-        <mat-label>Due Date</mat-label>
-        <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" required>
-        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #dueDatePicker></mat-datepicker>
-      </mat-form-field>
-
-<!--      &lt;!&ndash; Status Field &ndash;&gt;-->
-<!--      <mat-form-field>-->
-<!--        <mat-label>Status</mat-label>-->
-<!--        <mat-select formControlName="status" required>-->
-<!--          <mat-option *ngFor="let status of taskStatusOptions" [value]="status">{{ status }}</mat-option>-->
-<!--        </mat-select>-->
-<!--      </mat-form-field>-->
-      <!-- Tags Field -->
-<!--      <mat-form-field>-->
-<!--        <mat-label>Tags</mat-label>-->
-<!--        <mat-chips formControlName="tags" required>-->
-<!--        </mat-chips>-->
+<!--<form [formGroup]="taskForm" style="background:white; padding: 1rem" (ngSubmit)="SaveTask()" >-->
+<!--  <mat-card style="background:white;  padding: 1rem">-->
+<!--    <mat-card-title>Add Task</mat-card-title>-->
+<!--    <mat-card-content>-->
+<!--      &lt;!&ndash; Id Field (Hidden) &ndash;&gt;-->
+<!--      <mat-form-field style="background:white;" *ngIf="isEdite">-->
+<!--        <input matInput formControlName="title" required>-->
 <!--      </mat-form-field>-->
 
-      <app-chips-input   [fruits]="tags" style="background: white;">
 
-      </app-chips-input>
+<!--      &lt;!&ndash; Title Field &ndash;&gt;-->
+<!--      <mat-form-field style="background:white;">-->
+<!--        <mat-label>Title</mat-label>-->
+<!--        <input matInput formControlName="title" required>-->
+<!--      </mat-form-field>-->
+
+<!--      &lt;!&ndash; Description Field &ndash;&gt;-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Description</mat-label>-->
+<!--        <textarea matInput formControlName="description" required></textarea>-->
+<!--      </mat-form-field>-->
+
+<!--      &lt;!&ndash; Start Date Field &ndash;&gt;-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Start Date</mat-label>-->
+<!--        <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" required>-->
+<!--        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #startDatePicker></mat-datepicker>-->
+<!--      </mat-form-field>-->
+
+<!--      &lt;!&ndash; Due Date Field &ndash;&gt;-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Due Date</mat-label>-->
+<!--        <input matInput [matDatepicker]="dueDatePicker" formControlName="dueDate" required>-->
+<!--        <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #dueDatePicker></mat-datepicker>-->
+<!--      </mat-form-field>-->
+
+<!--&lt;!&ndash;      &lt;!&ndash; Status Field &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-label>Status</mat-label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-select formControlName="status" required>&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-option *ngFor="let status of taskStatusOptions" [value]="status">{{ status }}</mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-select>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+<!--      &lt;!&ndash; Tags Field &ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-form-field>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-label>Tags</mat-label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-chips formControlName="tags" required>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-chips>&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-form-field>&ndash;&gt;-->
+
+<!--      <app-chips-input   [fruits]="tags" style="background: white;">-->
+
+<!--      </app-chips-input>-->
 
 
 
-    </mat-card-content>
+<!--    </mat-card-content>-->
 
-    <mat-card-actions>
-      <!-- Save Button -->
-      <button type="submit" mat-raised-button color="primary" >Save</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+<!--    <mat-card-actions>-->
+<!--      &lt;!&ndash; Save Button &ndash;&gt;-->
+<!--      <button type="submit" mat-raised-button color="primary" >Save</button>-->
+<!--    </mat-card-actions>-->
+<!--  </mat-card>-->
+<!--</form>-->

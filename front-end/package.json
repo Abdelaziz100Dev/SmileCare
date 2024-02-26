@@ -24,9 +24,13 @@
     "@ngrx/effects": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "@ngrx/store-devtools": "^16.2.0",
+    "animate.css": "^4.1.1",
     "bootstrap": "^5.3.2",
+    "leaflet": "^1.9.4",
     "mdb-angular-ui-kit": "^5.2.0",
+    "ng-zorro-antd": "^17.2.0",
     "ngx-cookie-service": "^16.1.0",
+    "ngx-malihu-scrollbar": "^9.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

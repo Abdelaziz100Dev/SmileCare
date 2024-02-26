@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {loginFailure, loginSuccess, requestLogin} from "./authActions";
-import {_TaskReducer} from "../task/Task-Reducer";
+// import {_TaskReducer} from "../task/Task-Reducer";
 import {AuthState, Token} from "./authState";
 // import { login, loginSuccess, loginFailure } from './login.actions';
 

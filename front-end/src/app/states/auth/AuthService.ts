@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {env} from "../../../enviroments/enviroment";
+import {env} from "../../../environments/environment";
 import {AuthState} from "./authState";
 
 @Injectable({

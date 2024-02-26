@@ -14,15 +14,15 @@ import {MatButtonModule} from "@angular/material/button";
 import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import { TasksComponent } from './components/List-tasks/tasks.component';
+// import { TasksComponent } from './components/List-tasks/tasks.component';
 // import {taskReducer} from "./states/task/reducer";
-import {TaskEffects} from "./states/task/Task.Effectes";
+// import {TaskEffects} from "./states/task/Task.Effectes";
 import {MatCardModule} from "@angular/material/card";
 import {MatTableModule} from "@angular/material/table";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {AppEffects} from "./states/common/App.Effects";
-import {taskReducer} from "./states/task/Task-Reducer";
-import { AddTaskComponent } from './components/add-task/add-task.component';
+// import {taskReducer} from "./states/task/Task-Reducer";
+// import { AddTaskComponent } from './components/add-task/add-task.component';
 import {MaterialModule} from "./Material.Module";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
@@ -35,24 +35,30 @@ import {userReducer} from "./states/auth/authReducer";
 import {LoginEffects} from "./states/auth/authEffects";
 import {RegisterComponent} from "./components/auth/RegisterComponent";
 import { HomeComponent } from './pages/home/home.component';
-import {LoginFormComponent} from "./components/login-form";
-import {TCInputComponent} from "./components/input";
-import {TCSwitcherComponent} from "./components/switcher";
-import {TCButtonComponent} from "./components/button";
+// import {LoginFormComponent} from "./components/login-form";
+// import {TCInputComponent} from "./components/input";
+// import {TCSwitcherComponent} from "./components/switc
+// ;
+import {CommonModule} from "@angular/common";
+import {TCInputComponent} from "./ui/components/input";
+import {TCSwitcherComponent} from "./ui/components/switcher";
+import {TCButtonComponent} from "./ui/components/button";
+import {LoginFormComponent} from "./ui/components/login-form";
+import {TCFormGroupComponent} from "./ui/components/form-group";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TasksComponent,
-    AddTaskComponent,
+    // TasksComponent,
+    // AddTaskComponent,
     // LoginComponent,
     LoginComponent,
-    LoginFormComponent,
+    // LoginFormComponent,
     RegisterComponent,
     HomeComponent,
     TCInputComponent,
-    TCSwitcherComponent,TCButtonComponent
+    TCSwitcherComponent, TCButtonComponent, LoginFormComponent, TCFormGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +66,7 @@ import {TCButtonComponent} from "./components/button";
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
     // NgOptimizedImage,
     BrowserAnimationsModule,
     MdbCheckboxModule,
@@ -68,8 +75,8 @@ import {TCButtonComponent} from "./components/button";
     MatDialogModule,
     MatButtonModule,
     //Ngrx modules
-    StoreModule.forRoot({tasks: taskReducer,user:userReducer}),
-    EffectsModule.forRoot([TaskEffects, AppEffects,LoginEffects]),
+    StoreModule.forRoot({user:userReducer}),
+    EffectsModule.forRoot([AppEffects,LoginEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     MatCardModule,
     MatTableModule,
