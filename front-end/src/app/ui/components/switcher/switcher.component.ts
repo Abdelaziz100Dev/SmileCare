@@ -25,15 +25,15 @@ export class TCSwitcherComponent implements OnInit {
   @Input() label: string;
   @Input() name: string;
   @Input('value') _value: boolean;
-  @Input() bgColor?: string | string[];
+  @Input() bgColor: string | string[];
   @Input() borderColor: string | string[];
   @Input() color: string | string[];
-	@Input() labelColor?: string | string[];
+	@Input() labelColor: string | string[];
 	@Output() valueChanged: EventEmitter<boolean>;
-  currentBgColor?: string;
-  currentBorderColor?: string;
-  currentColor?: string;
-  currentLabelColor?: string;
+  currentBgColor: string;
+  currentBorderColor: string;
+  currentColor: string;
+  currentLabelColor: string;
   states: any;
   onChange: any = () => { };
   onTouched: any = () => { };
@@ -62,15 +62,15 @@ export class TCSwitcherComponent implements OnInit {
     this.onTouched();
   }
 
-  registerOnChange(fn: any) {
+  registerOnChange(fn) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: any) {
+  registerOnTouched(fn) {
     this.onTouched = fn;
   }
 
-  writeValue(value: boolean) {
+  writeValue(value) {
     if (value) {
       this.value = value;
     }

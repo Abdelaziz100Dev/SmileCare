@@ -12,7 +12,7 @@ export class TCButtonComponent implements OnInit {
     return 'tc-btn';
   };
   @HostBinding('class.btn-block') @Input() block: boolean;
-  @HostBinding('class.btn-square') @Input() square?: boolean;
+  @HostBinding('class.btn-square') @Input() square: boolean;
   @HostBinding('class.btn-disabled') @Input() disabled: boolean;
   @HostBinding('class.btn-load') @Input() load: boolean;
   @HostBinding('class.btn-outline') @Input() outline: boolean;
@@ -31,9 +31,9 @@ export class TCButtonComponent implements OnInit {
   @Input() align: string;
   @Input() size: string;
   @Input() view: string;
-  @Input() tcLineStyle?: string;
-  @Input() beforeIcon?: string;
-  @Input() afterIcon?: string;
+  @Input() tcLineStyle: string;
+  @Input() beforeIcon: string;
+  @Input() afterIcon: string;
 
   constructor() {
     this.block = false;

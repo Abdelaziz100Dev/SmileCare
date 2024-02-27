@@ -1,8 +1,8 @@
-import {isDevMode, NgModule, OnInit} from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, isDevMode, NgModule, OnInit} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -29,36 +29,39 @@ import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import {MatChipsModule} from "@angular/material/chips";
 // import { StandaloneComponentsComponent } from './components/standalone-components/standalone-components.component';
 // import { ChipsInputExampleComponent } from './components/standaloneComponents/chips-input-example/chips-input-example.component';
-import { ChipsInputComponent } from './components/standaloneComponents/chips-input/chips-input.component';
+import {ChipsInputComponent} from './components/standaloneComponents/chips-input/chips-input.component';
 import {LoginComponent} from "./pages/sessions/login/login.component";
 import {userReducer} from "./states/auth/authReducer";
 import {LoginEffects} from "./states/auth/authEffects";
 import {RegisterComponent} from "./components/auth/RegisterComponent";
-import { HomeComponent } from './pages/home/home.component';
+import {HomeComponent} from './pages/home/home.component';
 // import {LoginFormComponent} from "./components/login-form";
 // import {TCInputComponent} from "./components/input";
 // import {TCSwitcherComponent} from "./components/switc
 // ;
-import {CommonModule} from "@angular/common";
+import {CommonModule, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import {TCInputComponent} from "./ui/components/input";
 import {TCSwitcherComponent} from "./ui/components/switcher";
 import {TCButtonComponent} from "./ui/components/button";
-import {LoginFormComponent} from "./ui/components/login-form";
+// import {LoginFormComponent} from "./ui/components/login-form";
 import {TCFormGroupComponent} from "./ui/components/form-group";
+import {PagesModule} from "./pages/pages.module";
+import {LayoutModule} from "./layout/layout.module";
+import {UIModule} from "./ui/ui.module";
+import {pageDataReducer} from "./store/reducers/page-data.reducer";
+import {appSettingsReducer} from "./store/reducers/app-settings.reducer";
+import {patientsReducer} from "./store/reducers/patients.reducer";
+import { ROUTES, RoutingModule } from './routing/routing.module';
+import {RouterModule} from "@angular/router";
+import {en_US, NZ_I18N} from "ng-zorro-antd/i18n";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // TasksComponent,
-    // AddTaskComponent,
-    // LoginComponent,
     LoginComponent,
-    // LoginFormComponent,
     RegisterComponent,
-    HomeComponent,
-    TCInputComponent,
-    TCSwitcherComponent, TCButtonComponent, LoginFormComponent, TCFormGroupComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -67,17 +70,17 @@ import {TCFormGroupComponent} from "./ui/components/form-group";
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    // NgOptimizedImage,
     BrowserAnimationsModule,
     MdbCheckboxModule,
     MatInputModule,
     MatAutocompleteModule,
     MatDialogModule,
     MatButtonModule,
+
     //Ngrx modules
-    StoreModule.forRoot({user:userReducer}),
-    EffectsModule.forRoot([AppEffects,LoginEffects]),
+    EffectsModule.forRoot([AppEffects, LoginEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+
     MatCardModule,
     MatTableModule,
     MatSnackBarModule,
@@ -87,9 +90,26 @@ import {TCFormGroupComponent} from "./ui/components/form-group";
     MatChipsModule,
     ChipsInputComponent,
     // for debugging purposes only in development mode (remove in production), it gives us a nice UI to see the state of our store
+    RouterModule.forRoot(ROUTES, {}),
+    StoreModule.forRoot({
+      user: userReducer,
+      pageData: pageDataReducer,
+      appSettings: appSettingsReducer,
+      patients: patientsReducer
+    }),
 
+    RoutingModule,
+    LayoutModule,
+    UIModule,
+    PagesModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: NZ_I18N, useValue: en_US }
+  ],
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
-export class AppModule { }
+export class AppModule {}
