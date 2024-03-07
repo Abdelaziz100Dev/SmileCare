@@ -13,7 +13,7 @@ import static com.backend.enums.Permission.*;
 @RequiredArgsConstructor
 public enum Role {
 
-    USER(Set.of(
+    PATIENT(Set.of(
             ADMIN_READ,
             ADMIN_CREATE
     )),

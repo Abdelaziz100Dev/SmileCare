@@ -13,8 +13,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static com.backend.enums.Permission.*;
-//import static com.backend.enums.Permission.;
-import static com.backend.enums.Role.*;
+import static com.backend.enums.Role.ADMIN;
+import static com.backend.enums.Role.MANAGER;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -24,8 +24,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
-    private static final String[] WHITE_LIST_URL = {"/api/v1/auth/**",
-//            "/api/admin/**"
+    private static final String[] WHITE_LIST_URL = { "/api/v1/auth/**",
+            "/api/v1/appointments/**",
+            "/api/v1/patient/list/**"
 //            "/api/v1/Demo-controller",
     };
     private final JwtAuthentificationFilter jwtAuthFilter;
@@ -38,28 +39,29 @@ public class SecurityConfiguration {
 //        var  = "/api/v1/management/**";
          var AdminURL  = "/api/v1/admin/**";
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(req ->
-                req
-                    .requestMatchers(WHITE_LIST_URL).permitAll()
-                        .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(req ->
+                                req
+                                    .requestMatchers(WHITE_LIST_URL).permitAll()
+                                        .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+    //                        .requestMatchers("/api/v1/appointments/**").hasAnyRole(ADMIN.name(), MANAGER.name())
 
-                        .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
-                        .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
-                        .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
-                        .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+                                        .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                                        .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
+                                        .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
+                                        .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
 
-//                        .requestMatchers(AdminURL).hasRole(ADMIN.name())
-//
-//                        .requestMatchers(GET, AdminURL).hasAuthority(ADMIN_READ.name())
-//                        .requestMatchers(POST, AdminURL).hasAuthority(ADMIN_CREATE.name())
-//                        .requestMatchers(PUT, AdminURL).hasAuthority(ADMIN_UPDATE.name())
-//                        .requestMatchers(DELETE, AdminURL).hasAuthority(ADMIN_DELETE.name())
-                    .anyRequest().authenticated()
-            )
-            .sessionManagement(s -> s.sessionCreationPolicy(STATELESS))
-            .authenticationProvider(authenticationProvider) // specifying which authentication provider to use
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // use the jwtAuthFilter before the  UsernamePasswordAuthenticationFilter
+                                        .requestMatchers(AdminURL).hasRole(ADMIN.name())
+
+                                        .requestMatchers(GET, AdminURL).hasAuthority(ADMIN_READ.name())
+                                        .requestMatchers(POST, AdminURL).hasAuthority(ADMIN_CREATE.name())
+                                        .requestMatchers(PUT, AdminURL).hasAuthority(ADMIN_UPDATE.name())
+                                        .requestMatchers(DELETE, AdminURL).hasAuthority(ADMIN_DELETE.name())
+                                        .anyRequest().authenticated()
+                )
+                .sessionManagement(s -> s.sessionCreationPolicy(STATELESS))
+                .authenticationProvider(authenticationProvider) // specifying which authentication provider to use
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class); // use the jwtAuthFilter before the  UsernamePasswordAuthenticationFilter
 
         return http.build();
     }
