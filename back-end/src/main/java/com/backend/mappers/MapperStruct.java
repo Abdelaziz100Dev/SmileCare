@@ -9,6 +9,7 @@ import com.backend.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -16,7 +17,13 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MapperStruct {
+// @Mapping(source = "id", target = "id", defaultValue = "null")
+ @Mapping(target = "id", source = "id", qualifiedByName = "mapId")
  Appointment toAppointmentEntity(AppointmentRequestDto appointmentRequestDto);
+ @Named("mapId")
+ default Long mapId(Long id) {
+  return StringUtils.isEmpty(id) ? null : id;
+ }
  AppointmentResponseDto toAppointmentResponseDto(Appointment appointment);
  List<PatientsResponseDto> toListOfPatientsResponseDto(List<User> user);
  List<AppointmentResponseDto> toListOfAppointmentResponseDto(List<Appointment> appointments);

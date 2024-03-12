@@ -10,8 +10,8 @@ import java.util.List;
 public interface IAppointmentService {
     AppointmentResponseDto getAppointmentById(Long id);
     AppointmentResponseDto addAppointment(AppointmentRequestDto appointment);
-    void deleteAppointment(Long id);
-    AppointmentResponseDto updateAppointment(AppointmentRequestDto appointment);
+    boolean deleteAppointment(Long id);
+    boolean updateAppointment(Long id,AppointmentRequestDto appointment);
     List<AppointmentForListResponseDto> getAppointments();
     List<AppointmentResponseDto> getAppointmentsByDoctorId(Long doctorId);
     List<AppointmentResponseDto> getAppointmentsByPatientId(Long patientId);

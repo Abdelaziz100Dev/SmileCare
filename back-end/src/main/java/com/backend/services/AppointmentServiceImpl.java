@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -33,13 +34,31 @@ public class AppointmentServiceImpl implements IAppointmentService {
     }
 
 @Override
-public void deleteAppointment(Long id) {
-    appointmentRepository.deleteById(id);
+public boolean deleteAppointment(Long id) {
+    Optional<Appointment> appointmentOptional = appointmentRepository.findById(id);
+
+    // Check if the appointment exists
+    if (appointmentOptional.isPresent()) {
+        // If it exists, delete it
+        appointmentRepository.deleteById(id);
+        return true;
+    } else {
+        // If it doesn't exist, return false
+        return false;
+    }
 }
 
     @Override
-    public AppointmentResponseDto updateAppointment(AppointmentRequestDto appointment) {
-        return null;
+    public boolean updateAppointment(Long id,AppointmentRequestDto appointmentDto) {
+        Optional<Appointment> appointmentOptional = appointmentRepository.findById(appointmentDto.getId());
+
+        // Check if the appointment exists
+        if (appointmentOptional.isPresent()) {
+            appointmentRepository.save(mapperStruct.toAppointmentEntity(appointmentDto));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

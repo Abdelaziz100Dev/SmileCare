@@ -28,16 +28,16 @@
                 <span class="nowrap" [tcColor]="'#a5a5a5'">{{ value }}</span>
             </ng-template>
         </tc-table-col>
-<!--        <tc-table-col [columnTitle]="'Number'" [columnName]="'number'">-->
-<!--            <ng-template #tableTDTemplate let-value>-->
-<!--        <span class="d-flex align-items-center nowrap" [tcColor]="'#336cfb'">-->
-<!--          <tc-icon [iconClass]="'icofont-ui-cell-phone'" [tcFontSize]="16" [padding]="0" class="me-1"></tc-icon>-->
-<!--            {{ value }}-->
-<!--        </span>-->
-<!--            </ng-template>-->
-<!--        </tc-table-col>-->
-<!--        <tc-table-col [columnTitle]="'Doctor'" [columnName]="'doctor'" [enableSorting]="true"></tc-table-col>-->
-        <tc-table-col [columnTitle]="'Injury / Condition'" [columnName]="'reason'"
+        <!--        <tc-table-col [columnTitle]="'Number'" [columnName]="'number'">-->
+        <!--            <ng-template #tableTDTemplate let-value>-->
+        <!--        <span class="d-flex align-items-center nowrap" [tcColor]="'#336cfb'">-->
+        <!--          <tc-icon [iconClass]="'icofont-ui-cell-phone'" [tcFontSize]="16" [padding]="0" class="me-1"></tc-icon>-->
+        <!--            {{ value }}-->
+        <!--        </span>-->
+        <!--            </ng-template>-->
+        <!--        </tc-table-col>-->
+        <!--        <tc-table-col [columnTitle]="'Doctor'" [columnName]="'doctor'" [enableSorting]="true"></tc-table-col>-->
+        <tc-table-col [columnTitle]="'Reason'" [columnName]="'reason'"
                       [enableSorting]="true"></tc-table-col>
         <tc-table-col [columnTitle]="'Actions'" [columnName]="'actions'">
             <ng-template #tableTDTemplate let-row="row">
@@ -82,15 +82,15 @@
 <ng-container>
     <ng-template #modalBody>
         <form [formGroup]="appointmentForm" novalidate>
-            <tc-form-group class="avatar-box d-flex">
-                <input type="file" accept="image/*" (change)="onFileChanged($event)" #fileInput hidden>
+            <!--            <tc-form-group class="avatar-box d-flex">-->
+            <!--                <input type="file" accept="image/*" (change)="onFileChanged($event)" #fileInput hidden>-->
 
-                <tc-avatar [src]="appointmentForm.value.img"></tc-avatar>
-                <button tc-button [type]="'button'" [afterIcon]="'icofont-ui-user'" [view]="'accent'" [outline]="true"
-                        (click)="fileInput.click()">
-                    Select image
-                </button>
-            </tc-form-group>
+            <!--                <tc-avatar [src]="appointmentForm.value.img"></tc-avatar>-->
+            <!--                <button tc-button [type]="'button'" [afterIcon]="'icofont-ui-user'" [view]="'accent'" [outline]="true"-->
+            <!--                        (click)="fileInput.click()">-->
+            <!--                    Select image-->
+            <!--                </button>-->
+            <!--            </tc-form-group>-->
             <tc-form-group>
                 <tc-autocomplete [placeholder]="'Patient name'" [data]="patients" [key]="'firstname'"
                                  formControlName="patient"></tc-autocomplete>
@@ -104,7 +104,7 @@
 
                 ></nz-date-picker>
             </tc-form-group>
-            <tc-form-group>-->
+            <tc-form-group>
                 <tc-input [placeholder]="'Reason'" formControlName="reason"></tc-input>
             </tc-form-group>
         </form>
@@ -113,10 +113,19 @@
     <ng-template #modalFooter>
         <div class="actions justify-content-between">
             <button tc-button [type]="'button'" [view]="'error'" (click)="closeModal()">Cancel</button>
-            <button tc-button [view]="'info'" [disabled]="appointmentForm.invalid"
-                    (click)="addAppointment(appointmentForm)">
-                Add appointment
-            </button>
+            <div *ngIf="appointmentForm.value.id;  else elseBlockAddAppointment" class="d-flex">
+                <button tc-button [view]="'info'" [disabled]="appointmentForm.invalid"
+                        (click)="updateAppointment(appointmentForm)">
+                    Update appointment
+                </button>
+            </div>
+            <ng-template #elseBlockAddAppointment>
+                <button tc-button [view]="'info'" [disabled]="appointmentForm.invalid"
+                        (click)="addAppointment(appointmentForm)">
+                    Add appointment
+                </button>
+            </ng-template>
+
         </div>
     </ng-template>
 </ng-container>

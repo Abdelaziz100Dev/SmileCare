@@ -4,6 +4,7 @@ import com.backend.dto.dtoRequest.AppointmentRequestDto;
 import com.backend.dto.dtoResponse.AppointmentForListResponseDto;
 import com.backend.dto.dtoResponse.AppointmentResponseDto;
 import com.backend.services.interfaces.IAppointmentService;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,26 @@ public class AppointmentController {
         return new ResponseEntity<>(appointment, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAppointment(@RequestParam Long id) {
-        appointmentService.deleteAppointment(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<String>  deleteAppointment(@PathVariable Long id) {
+
+        boolean deleted = appointmentService.deleteAppointment(id);
+
+        // Check if the appointment was successfully deleted
+        if (deleted) {
+            return new ResponseEntity<>("Appointment with ID " + id + " deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Appointment with ID " + id + " not found", HttpStatus.NOT_FOUND);
+        }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateAppointment(@PathVariable Long id, @RequestBody AppointmentRequestDto appointmentRequestDto) {
+        boolean updated = appointmentService.updateAppointment(id, appointmentRequestDto);
+        if (updated) {
+            return new ResponseEntity<>("Appointment with ID " + appointmentRequestDto.getId() + " updated successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Appointment with ID " + appointmentRequestDto.getId() + " not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }

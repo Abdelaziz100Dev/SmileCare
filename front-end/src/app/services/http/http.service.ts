@@ -31,16 +31,23 @@ export class HttpService {
       catchError(this.handleError)
     );
   }
+  putData(source: string,data:any) {
+    return this.http.put(env.host + source,data).pipe(
+      tap((res: any) => res),
+      catchError(this.handleError)
+    );
+  }
 
   private handleError(error: any) {
     return observableThrowError(error.error || 'Server error');
   }
 
   delete(url: string) {
-    return this.http.delete(url).pipe(
-      tap((res: any) => res),
-      catchError(this.handleError)
-    );
+    // return this.http.delete(env.host + url, { observe: 'response' }).pipe(
+    //   tap((res: any) => res),
+    //   catchError(this.handleError)
+    // );
+    return this.http.delete(env.host + url, { observe: 'response',responseType: 'text' });
 
   }
 }

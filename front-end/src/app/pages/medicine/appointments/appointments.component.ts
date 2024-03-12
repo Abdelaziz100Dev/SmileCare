@@ -52,7 +52,7 @@ export class PageAppointmentsComponent extends BasePageComponent implements OnIn
         super.ngOnInit();
 
         // this.getData('assets/data/appointments.json', 'appointments', 'setLoaded');
-        this.getDataFromRemoteSource('/api/v1/appointments', 'appointments','setLoaded' );
+        this.getDataFromRemoteSource('/api/v1/appointments', 'appointments', 'setLoaded');
         // this.getData('assets/data/doctors.json', 'doctors');
         this.getDataFromRemoteSource('/api/v1/patient/list', 'patients');
 
@@ -69,7 +69,7 @@ export class PageAppointmentsComponent extends BasePageComponent implements OnIn
         this.modal.open({
             body: body,
             header: header,
-            footer: footer
+            footer: footer,
         });
     }
 
@@ -81,15 +81,17 @@ export class PageAppointmentsComponent extends BasePageComponent implements OnIn
 
     // init form
     initForm(data: any) {
+        debugger;
         this.appointmentForm = this.formBuilder.group({
             // img: [(data ? data.img : this.currentAvatar)],
-            reason: [(data ? data.name : ''), Validators.required],
+            id: [(data ? data.id : '')],
+            reason: [(data ? data.reason : ''), Validators.required],
             // email: [(data ? data.email : ''), Validators.required],
-            appointmentDateTime: [(data ? data.appointmentDateTime : ''), Validators.required],
+            appointmentDateTime: [(data ? data.appointmentDate +" "+ data.appointmentTime : ''), Validators.required],
             // beginTime: [(data ? data.fromTo.substring(0, (data.fromTo.indexOf('-') - 1)) : ''), Validators.required],
             // to: [(data ? data.fromTo.substring((data.fromTo.indexOf('-') + 2), data.fromTo.length) : ''), Validators.required],
             // number: [(data ? data.number : ''), Validators.required],
-            patient: [(data ? data.patient : ''), Validators.required],
+            patient: [(data ? data.name : ''), Validators.required],
             // injury: [(data ? data.injury : ''), Validators.required]
         });
     }
@@ -108,15 +110,20 @@ export class PageAppointmentsComponent extends BasePageComponent implements OnIn
 
     // edit appointment
     edit(row: any) {
-        this.openModal(this.modalBody, 'Add appointment', this.modalFooter, row);
+        debugger;
+        this.openModal(this.modalBody, 'Edite appointment', this.modalFooter, row);
     }
 
     // remove appointment
     remove(tableRow: any) {
-        console.log("tableRow : ",tableRow);
-        this.deleteItem('/api/v1/appointments/'+tableRow.id, 'appointments')
+        // console.log("tableRow : ",tableRow);
+        this.deleteItem('/api/v1/appointments/' + tableRow.id).subscribe(resp => {
+                if (resp.status == 200) {
+                    this.appointments = this.appointments.filter(row => row !== tableRow)
+                }
+            }
+        );
 
-        // this.appointments = this.appointments.filter(row => row !== tableRow);
     }
 
     // add new appointment
@@ -147,5 +154,35 @@ export class PageAppointmentsComponent extends BasePageComponent implements OnIn
             this.appointments = newTableData;
             this.closeModal();
         }
+    }
+
+    updateAppointment(form: FormGroup) {
+        if (form.valid) {
+            let newAppointment: any = form.value;
+            const selectedPatient = this.patients.find(patient => patient.firstname === newAppointment.patient);
+
+
+            // console.log("date : ", date, " time : ", time);
+            const formattedTimeString = new Date(newAppointment.appointmentDateTime).toISOString().slice(0, -5);
+            // console.log("formattedTimeString : ", formattedTimeString);
+            if (selectedPatient) {
+                newAppointment.patient = {"id": selectedPatient.id};
+                newAppointment.appointmentDateTime = formattedTimeString;
+            }
+            // console.log("newAppointment   : ", newAppointment);
+            this.updateData('/api/v1/appointments/'+newAppointment.id, newAppointment);
+
+
+            this.appointments.splice(this.appointments.findIndex(appointment => appointment.id === newAppointment.id), 1);
+            console.log("this.appointments : ", this.appointments);
+
+            this.appointments.unshift(newAppointment);
+            let newTableData = JSON.parse(JSON.stringify(this.appointments));
+            console.log("newTableData : ", newTableData);
+
+            this.appointments = newTableData;
+            this.closeModal();
+        }
+
     }
 }
